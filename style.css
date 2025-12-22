@@ -1,0 +1,176 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  /* overflow: hidden; */
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.whole-div {
+  display: block;
+  /* border: 1px solid green; */
+  border-radius: 5px;
+  width: 80%;
+  margin-top: 50px;
+  padding: 5px;
+}
+
+form {
+  /* border: 2px solid blueviolet; */
+  border-radius: 5px;
+  width: 90%;
+  margin: 5px;
+  padding: 30px;
+  justify-self: center;
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+h1{
+  text-align: center;
+  color: #088a83;
+  margin-bottom: 20px;
+}
+
+hr{
+  background-color: #088a83;
+  padding: 1px;
+  border: none;
+}
+
+.inputs-div {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: auto auto auto;
+  /* border: 1px solid #58bfee; */
+  justify-content: space-between;
+  width: 100%;
+}
+
+.inputs-div > * {
+  margin: 10px 0px;
+  /* border: 1px solid green; */
+  width: inherit;
+}
+
+input {
+  border: 2px solid #088a83;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 18px;
+  outline: none;
+  width: inherit;
+}
+
+textarea {
+  border: 2px solid #088a83;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 18px;
+  outline: none;
+}
+
+.address-div {
+  display: grid;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+#submitId {
+  background-color: #088a83;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.tableMainClass {
+  overflow: scroll;
+  border: 2px solid #088a83;
+  border-radius: 5px 5px 0 0;
+}
+
+.tableClass {
+  border-collapse: collapse;
+  border-radius: 5px 5px 0 0;
+  width: 100%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.tableClass thead tr {
+  background-color: #088a83;
+  color: #fff;
+  text-align: left;
+  font-weight: bold;
+}
+
+.tableClass th,
+.tableClass td {
+  padding: 12px 15px;
+  white-space: nowrap;
+  /* text-align: center; */
+}
+
+td button {
+  border: none;
+  background-color: #ffffff;
+}
+
+td button i {
+  color: #088a83;
+  cursor: pointer;
+}
+
+.tableClass tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.tableClass tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.tableClass tbody tr:last-of-type {
+  border-bottom: 2px solid #088a83;
+}
+
+@media screen and (max-width: 1024px) {
+  .inputs-div {
+    grid-template-columns: auto auto;
+  }
+
+  .address-div {
+    display: grid;
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+
+  .tableMainClass {
+    overflow: scroll;
+    border: 1px solid rgb(0, 87, 128);
+    border-radius: 5px 5px 0 0;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .inputs-div {
+    grid-template-columns: auto;
+  }
+
+  .address-div {
+    display: grid;
+    grid-column-start: 1;
+    grid-column-end: 2;
+  }
+}
