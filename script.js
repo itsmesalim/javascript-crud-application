@@ -1,6 +1,7 @@
 // localStorage.clear();
 
 // storing data in localStorage
+
 let id = null;
 
 const handleSubmit = (event) => {
@@ -13,14 +14,74 @@ const handleSubmit = (event) => {
   let email = document.getElementById("emailId").value;
   let address = document.getElementById("addressId").value;
 
+  const firstNameError = document.getElementById("firstNameError");
+  const lastNameError = document.getElementById("lastNameError");
+  const dobError = document.getElementById("dobError");
+  const admissionError = document.getElementById("admissionError");
+  const phoneError = document.getElementById("phoneError");
+  const emailError = document.getElementById("emailError");
+  const addressError = document.getElementById("addressError");
+
+  firstNameError.textContent = "";
+  lastNameError.textContent = "";
+  dobError.textContent = "";
+  admissionError.textContent = "";
+  phoneError.textContent = "";
+  emailError.textContent = "";
+  addressError.textContent = "";
+
+  let isValid = true;
+
   let studentRecord = JSON.parse(localStorage.getItem("students"))
     ? JSON.parse(localStorage.getItem("students"))
     : [];
 
   if (id === null) {
-    if (studentRecord.some((duplicate) => duplicate.email === email)) {
-      alert(`this '${email}' email is already exist`);
+    if (firstName === "" || /\d/.test(firstName)) {
+      firstNameError.textContent = "Please enter your first name properly.";
+      isValid = false;
+    } else if (firstName.length < 3) {
+      firstNameError.textContent =
+        "First name must be at least 3 characters long.";
+      isValid = false;
+    }
+
+    if (dateOfBirth === "") {
+      dobError.textContent = "date of birth is required.";
+      isValid = false;
+    }
+
+    if (admissionDate === "") {
+      admissionError.textContent = "admission date is required.";
+      isValid = false;
+    }
+
+    if (phone === "") {
+      phoneError.textContent = "Please enter phone number.";
+      isValid = false;
+    } else if (!/^\d{10}$/.test(phone)) {
+      phoneError.textContent = "Please enter only 10 digit phone number.";
+      isValid = false;
+    }
+
+    if (email === "") {
+      emailError.textContent = "Please enter your email.";
+      isValid = false;
+    } else if (studentRecord.some((duplicate) => duplicate.email === email)) {
+      emailError.textContent = `this '${email}' email is already exist`;
       return;
+    }
+
+    if (address === "") {
+      addressError.textContent = "Please enter your address.";
+      isValid = false;
+    } else if (address.length < 10) {
+      addressError.textContent = "Address must be at least 10 characters long.";
+      isValid = false;
+    } else if (address.length > 100) {
+      addressError.textContent =
+        "Address must be less than 100 characters long.";
+      isValid = false;
     }
 
     studentRecord.push({
@@ -32,7 +93,59 @@ const handleSubmit = (event) => {
       email,
       address,
     });
+
+    if (isValid) {
+      console.log("form submited");
+      // alert("Form submitted successfully!");
+      // return true;
+    } else {
+      return false;
+    }
   } else {
+    if (firstName === "" || /\d/.test(firstName)) {
+      firstNameError.textContent = "Please enter your first name properly.";
+      isValid = false;
+    } else if (firstName.length < 3) {
+      firstNameError.textContent =
+        "First name must be at least 3 characters long.";
+      isValid = false;
+    }
+
+    if (dateOfBirth === "") {
+      dobError.textContent = "date of birth is required.";
+      isValid = false;
+    }
+
+    if (admissionDate === "") {
+      admissionError.textContent = "admission date is required.";
+      isValid = false;
+    }
+
+    if (phone === "") {
+      phoneError.textContent = "Please enter phone number.";
+      isValid = false;
+    } else if (!/^\d{10}$/.test(phone)) {
+      phoneError.textContent = "Please enter only 10 digit phone number.";
+      isValid = false;
+    }
+
+    if (email === "") {
+      emailError.textContent = "Please enter your email.";
+      isValid = false;
+    }
+
+    if (address === "") {
+      addressError.textContent = "Please enter your address.";
+      isValid = false;
+    } else if (address.length < 10) {
+      addressError.textContent = "Address must be at least 10 characters long.";
+      isValid = false;
+    } else if (address.length > 100) {
+      addressError.textContent =
+        "Address must be less than 100 characters long.";
+      isValid = false;
+    }
+
     studentRecord[id] = {
       firstName,
       lastName,
@@ -42,6 +155,14 @@ const handleSubmit = (event) => {
       email,
       address,
     };
+
+    if (isValid) {
+      console.log("form submited");
+      // alert("Form submitted successfully!");
+      // return true;
+    } else {
+      return false;
+    }
     id = null;
   }
 
@@ -77,6 +198,8 @@ const showStudentsData = () => {
 };
 
 const editData = (index) => {
+  document.getElementById("firstNameId").focus();
+
   let students = JSON.parse(localStorage.getItem("students"));
 
   id = index;

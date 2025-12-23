@@ -33,13 +33,13 @@ form {
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-h1{
+h1 {
   text-align: center;
   color: #088a83;
   margin-bottom: 20px;
 }
 
-hr{
+hr {
   background-color: #088a83;
   padding: 1px;
   border: none;
@@ -60,6 +60,12 @@ hr{
   width: inherit;
 }
 
+.required:after {
+  content: "*";
+  color: red;
+  font-size: 15px;
+}
+
 input {
   border: 2px solid #088a83;
   border-radius: 5px;
@@ -67,6 +73,13 @@ input {
   font-size: 18px;
   outline: none;
   width: inherit;
+}
+
+small {
+  /* border: 1px solid red; */
+  width: inherit;
+  color: red;
+  padding: 10px;
 }
 
 textarea {

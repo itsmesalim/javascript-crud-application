@@ -21,7 +21,11 @@
 
   <body>
     <div class="whole-div">
-      <form onsubmit="handleSubmit(event)" id="student-form">
+      <form
+        action="#resultsTable"
+        onsubmit="handleSubmit(event)"
+        id="student-form"
+      >
         <h1>Student Record Form</h1>
         <hr />
 
@@ -29,50 +33,66 @@
           <input type="hidden" id="student-id" name="id" />
 
           <div>
-            <label>First Name</label><br />
+            <label class="required">First Name</label><br />
             <input type="text" placeholder="first name" id="firstNameId" />
+            <br />
+            <small id="firstNameError"></small>
           </div>
 
           <div>
             <label>Last Name</label><br />
             <input type="text" placeholder="last name" id="lastNameId" />
+            <br />
+            <small id="lastNameError"></small>
           </div>
 
           <div>
-            <label>Date of Birth</label> <br />
+            <label class="required">Date of Birth</label> <br />
             <input type="date" id="dobId" />
+            <br />
+            <small id="dobError"></small>
           </div>
 
           <div>
-            <label>Admission Date</label> <br />
+            <label class="required">Admission Date</label> <br />
             <input type="date" id="admissionId" />
+            <br />
+            <small id="admissionError"></small>
           </div>
 
           <div>
-            <label>Phone</label> <br />
+            <label class="required">Phone</label> <br />
             <input type="tel" id="phoneId" />
+            <br />
+            <small id="phoneError"></small>
           </div>
 
           <div>
-            <label>email</label> <br />
+            <label class="required">email</label> <br />
             <input type="email" id="emailId" />
+            <br />
+            <small id="emailError"></small>
           </div>
 
           <div class="address-div">
-            <label>Address</label>
+            <label class="required">Address</label>
             <textarea type="text" id="addressId"></textarea>
+            <br />
+            <small id="addressError"></small>
           </div>
         </div>
         <br />
 
         <div class="inputs-div">
-          <div><input type="submit" id="submitId" value="Submit" /></div>
+          <div>
+            <input type="submit" id="submitId" value="Submit" />
+          </div>
         </div>
       </form>
       <br /><br />
 
       <div class="tableMainClass">
-        <table class="tableClass">
+        <table class="tableClass" id="resultsTable">
           <!-- <caption>
           Showing Students Record
         </caption> -->
