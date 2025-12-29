@@ -17,6 +17,18 @@
     />
 
     <link rel="stylesheet" href="/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
   </head>
 
   <body>
@@ -62,7 +74,16 @@
 
           <div>
             <label class="required">Phone</label> <br />
-            <input type="tel" id="phoneId" />
+
+            <input
+              type="text"
+              inputmode="numeric"
+              pattern="[0-9]{10}"
+              maxlength="10"
+              placeholder="Enter mobile number"
+              id="phoneId"
+            />
+
             <br />
             <small id="phoneError"></small>
           </div>
@@ -76,8 +97,7 @@
 
           <div class="address-div">
             <label class="required">Address</label>
-            <textarea type="text" id="addressId"></textarea>
-            <br />
+            <textarea type="text" id="addressId" rows="5"></textarea>
             <small id="addressError"></small>
           </div>
         </div>
@@ -91,21 +111,28 @@
       </form>
       <br /><br />
 
+      <!-- <div class="input-group"> -->
+      <div class="search-div">
+        <input
+          type="search"
+          placeholder="Search Data..."
+          oninput="searchTable()"
+        />
+        <!-- <img src="images/search.png" alt="" /> -->
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+
       <div class="tableMainClass">
         <table class="tableClass" id="resultsTable">
-          <!-- <caption>
-          Showing Students Record
-        </caption> -->
-
           <thead>
             <tr class="rowClass">
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Date of Birth</th>
-              <th>Admission Date</th>
-              <th>Phone</th>
-              <th>Email</th>
-              <th>Address</th>
+              <th>First Name <span class="icon-arrow">&UpArrow;</span></th>
+              <th>Last Name <span class="icon-arrow">&UpArrow;</span></th>
+              <th>Date of Birth <span class="icon-arrow">&UpArrow;</span></th>
+              <th>Admission Date <span class="icon-arrow">&UpArrow;</span></th>
+              <th>Phone <span class="icon-arrow">&UpArrow;</span></th>
+              <th>Email <span class="icon-arrow">&UpArrow;</span></th>
+              <th>Address <span class="icon-arrow">&UpArrow;</span></th>
               <th>Update</th>
               <th>Delete</th>
             </tr>
@@ -114,6 +141,7 @@
           <tbody id="showStudentsId"></tbody>
         </table>
       </div>
+      <br /><br /><br />
     </div>
     <br /><br /><br />
   </body>

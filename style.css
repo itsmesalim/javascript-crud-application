@@ -36,7 +36,6 @@ form {
 h1 {
   text-align: center;
   color: #088a83;
-  margin-bottom: 20px;
 }
 
 hr {
@@ -76,6 +75,7 @@ input {
 }
 
 small {
+  display: flex;
   /* border: 1px solid red; */
   width: inherit;
   color: red;
@@ -107,6 +107,41 @@ textarea {
   margin-top: 10px;
 }
 
+.search-div {
+  border: 2px solid #088a83;
+  width: 35%;
+  height: 100%;
+  background-color: #fff5;
+  padding: 0 1px;
+  border-radius: 32px;
+  display: flex;
+  justify-self: right;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+
+  transition: 0.2s;
+}
+
+.search-div:hover {
+  width: 45%;
+  background-color: #fff8;
+  box-shadow: 0 2px 6px #0002;
+}
+
+.search-div .fa-magnifying-glass {
+  width: 20px;
+  height: 20px;
+}
+
+.search-div input {
+  width: 100%;
+  padding: 5px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
 .tableMainClass {
   overflow: scroll;
   border: 2px solid #088a83;
@@ -125,6 +160,11 @@ textarea {
   color: #fff;
   text-align: left;
   font-weight: bold;
+  position: sticky;
+}
+
+.tableClass thead tr th:hover {
+  cursor: pointer;
 }
 
 .tableClass th,
@@ -132,6 +172,41 @@ textarea {
   padding: 12px 15px;
   white-space: nowrap;
   /* text-align: center; */
+}
+
+/* sorting arrows */
+
+.rowClass span.icon-arrow {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  text-align: center;
+  font-size: 12px;
+  /* transition: 0.2s ease-in-out; */
+}
+
+.rowClass th:hover {
+  color: #6c00bd;
+}
+
+.rowClass th:hover span.icon-arrow {
+  border: 1px solid #6c00bd;
+}
+
+.rowClass th.active span.icon-arrow {
+  background-color: #6c00bd;
+  color: #fff;
+}
+
+.rowClass th.asc span.icon-arrow {
+  transform: rotate(180deg);
+}
+
+.rowClass th.active,
+tbody td.active {
+  color: #6c00bd;
 }
 
 td button {
@@ -152,8 +227,18 @@ td button i {
   background-color: #f3f3f3;
 }
 
+.tableClass tbody tr:nth-of-type(even) button {
+  background-color: #f3f3f3;
+}
+
 .tableClass tbody tr:last-of-type {
   border-bottom: 2px solid #088a83;
+}
+
+tbody tr.hide {
+  display: none;
+  opacity: 0;
+  transform: translateX(100%);
 }
 
 @media screen and (max-width: 1024px) {
@@ -177,8 +262,30 @@ td button i {
 }
 
 @media screen and (max-width: 768px) {
+  h1 {
+    font-size: 24px;
+  }
+
+  hr {
+    width: 100%;
+    justify-self: center;
+  }
+
   .inputs-div {
-    grid-template-columns: auto;
+    display: block;
+    /* border: 1px solid #58bfee; */
+    justify-self: center;
+  }
+
+  .inputs-div > * {
+    margin: 10px 0px;
+    /* border: 1px solid green; */
+    justify-self: center;
+    width: 100%;
+  }
+
+  input {
+    width: 100%;
   }
 
   .address-div {

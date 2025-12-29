@@ -4,6 +4,7 @@
 
 let id = null;
 
+// Handling Form Submission
 const handleSubmit = (event) => {
   event.preventDefault();
   let firstName = document.getElementById("firstNameId").value;
@@ -56,12 +57,15 @@ const handleSubmit = (event) => {
       isValid = false;
     }
 
-    if (phone === "") {
+    if (phone === "" && phone.length < 10) {
+      console.log("phone = ", phone);
       phoneError.textContent = "Please enter phone number.";
       isValid = false;
     } else if (!/^\d{10}$/.test(phone)) {
       phoneError.textContent = "Please enter only 10 digit phone number.";
       isValid = false;
+    } else {
+      phone = document.getElementById("phoneId").value;
     }
 
     if (email === "") {
@@ -78,7 +82,7 @@ const handleSubmit = (event) => {
     } else if (address.length < 10) {
       addressError.textContent = "Address must be at least 10 characters long.";
       isValid = false;
-    } else if (address.length > 100) {
+    } else if (address.length > 500) {
       addressError.textContent =
         "Address must be less than 100 characters long.";
       isValid = false;
@@ -96,9 +100,27 @@ const handleSubmit = (event) => {
 
     if (isValid) {
       console.log("form submited");
-      // alert("Form submitted successfully!");
-      // return true;
+      Swal.fire({
+        title: "Good job!",
+        text: "Form submitted success",
+        icon: "success",
+      });
     } else {
+      Toastify({
+        text: "please fill all the required field before Submit!",
+        duration: 3000,
+        // destination: "https://github.com/apvarun/toastify-js",
+        newWindow: true,
+        close: true,
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+          background: "linear-gradient(to right, #f7b733, #fc4a1a)",
+        },
+        onClick: function () {}, // Callback after click
+      }).showToast();
+
       return false;
     }
   } else {
@@ -140,7 +162,7 @@ const handleSubmit = (event) => {
     } else if (address.length < 10) {
       addressError.textContent = "Address must be at least 10 characters long.";
       isValid = false;
-    } else if (address.length > 100) {
+    } else if (address.length > 500) {
       addressError.textContent =
         "Address must be less than 100 characters long.";
       isValid = false;
@@ -157,10 +179,32 @@ const handleSubmit = (event) => {
     };
 
     if (isValid) {
-      console.log("form submited");
+      console.log("form updated");
+      Swal.fire({
+        title: "Good job!",
+        text: "Form updated success",
+        icon: "success",
+      });
       // alert("Form submitted successfully!");
       // return true;
     } else {
+      console.log("fill all the required fields");
+
+      Toastify({
+        text: "please fill all the required fields before Update!",
+        duration: 3000,
+        // destination: "https://github.com/apvarun/toastify-js",
+        newWindow: true,
+        close: true,
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+          background: "linear-gradient(to right, #f7b733, #fc4a1a)",
+        },
+        onClick: function () {}, // Callback after click
+      }).showToast();
+
       return false;
     }
     id = null;
@@ -171,6 +215,7 @@ const handleSubmit = (event) => {
   showStudentsData();
 };
 
+// showing data from localStorage
 const showStudentsData = () => {
   document.getElementById("showStudentsId").innerHTML = "";
 
@@ -182,7 +227,7 @@ const showStudentsData = () => {
     let addTr = document.createElement("tr");
 
     addTr.innerHTML = `
-       <td> ${student.firstName} </td>
+       <td> ${student.firstName}</td>
        <td> ${student.lastName} </td>
        <td> ${student.dateOfBirth} </td>
        <td> ${student.admissionDate} </td>
@@ -197,6 +242,7 @@ const showStudentsData = () => {
   });
 };
 
+// Editing Data from localStorage
 const editData = (index) => {
   document.getElementById("firstNameId").focus();
 
@@ -215,16 +261,34 @@ const editData = (index) => {
   document.getElementById("submitId").value = "Update";
 };
 
+// Deleting Data from localStorage
 const deleteData = (index) => {
   let students = JSON.parse(localStorage.getItem("students"));
 
-  if (confirm("Are you sure you want to delete this record?")) {
-    students.splice(index, 1);
-    localStorage.setItem("students", JSON.stringify(students));
-    showStudentsData();
-  }
+  Swal.fire({
+    title: "Are you sure?",
+    text: `Are you sure to delete '${students[index].firstName} ${students[index].lastName},s' data?`,
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      students.splice(index, 1);
+      localStorage.setItem("students", JSON.stringify(students));
+      showStudentsData();
+
+      Swal.fire({
+        title: "Deleted!",
+        text: `${students[index].firstName} ${students[index].lastName}'s data has been deleted.`,
+        icon: "success",
+      });
+    }
+  });
 };
 
+//clear form data aafter submission
 const clearForm = () => {
   document.getElementById("firstNameId").value = "";
   document.getElementById("lastNameId").value = "";
@@ -238,3 +302,68 @@ const clearForm = () => {
 };
 
 showStudentsData();
+
+// Search Table Data
+const searchTable = () => {
+  const search = document.querySelector(".search-div input");
+  const tbody_rows = document.querySelectorAll("#showStudentsId tr");
+
+  tbody_rows.forEach((row, i) => {
+    const table_data = row.textContent.toLowerCase();
+    const search_data = search.value.toLowerCase();
+
+    row.classList.toggle("hide", !table_data.includes(search_data));
+    row.style.setProperty("--delay", i / 25 + "s");
+  });
+
+  document
+    .querySelectorAll("#showStudentsId tr:not(.hide)")
+    .forEach((visible_row, i) => {
+      visible_row.style.backgroundColor =
+        i % 2 == 0 ? "transparent" : "#0000000b";
+    });
+};
+
+// Sort Table Data
+
+table_headings = document.querySelectorAll("thead th");
+
+table_headings.forEach((head, i) => {
+  let sort_asc = true;
+  head.onclick = () => {
+    table_headings.forEach((head) => head.classList.remove("active"));
+    head.classList.add("active");
+
+    document
+      .querySelectorAll("#showStudentsId td")
+      .forEach((td) => td.classList.remove("active"));
+    document.querySelectorAll("#showStudentsId tr").forEach((row) => {
+      row.querySelectorAll("td")[i].classList.add("active");
+    });
+
+    head.classList.toggle("asc", sort_asc);
+    sort_asc = head.classList.contains("asc") ? false : true;
+    sortTable(i, sort_asc);
+  };
+});
+
+const sortTable = (column, sort_asc) => {
+  const tbody_rows = document.querySelectorAll("#showStudentsId tr");
+  [...tbody_rows]
+    .sort((a, b) => {
+      let first_row = a
+          .querySelectorAll("td")
+          [column].textContent.toLowerCase(),
+        second_row = b.querySelectorAll("td")[column].textContent.toLowerCase();
+      return sort_asc
+        ? first_row < second_row
+          ? 1
+          : -1
+        : first_row < second_row
+        ? -1
+        : 1;
+    })
+    .forEach((sorted_row) =>
+      document.getElementById("showStudentsId").appendChild(sorted_row)
+    );
+};
