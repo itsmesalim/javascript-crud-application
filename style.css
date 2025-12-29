@@ -188,15 +188,15 @@ textarea {
 }
 
 .rowClass th:hover {
-  color: #6c00bd;
+  color: #b9b2b2;
 }
 
 .rowClass th:hover span.icon-arrow {
-  border: 1px solid #6c00bd;
+  border: 1px solid #b9b2b2;
 }
 
 .rowClass th.active span.icon-arrow {
-  background-color: #6c00bd;
+  background-color: #02e0d9;
   color: #fff;
 }
 
@@ -204,9 +204,11 @@ textarea {
   transform: rotate(180deg);
 }
 
-.rowClass th.active,
+.rowClass th.active {
+  color: #02e0d9;
+}
 tbody td.active {
-  color: #6c00bd;
+  color: #088a83;
 }
 
 td button {

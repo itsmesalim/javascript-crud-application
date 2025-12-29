@@ -326,7 +326,7 @@ const searchTable = () => {
 
 // Sort Table Data
 
-table_headings = document.querySelectorAll("thead th");
+const table_headings = document.querySelectorAll("thead th");
 
 table_headings.forEach((head, i) => {
   let sort_asc = true;
