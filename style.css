@@ -178,26 +178,13 @@ textarea {
 
 .rowClass span.icon-arrow {
   display: inline-block;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 1px solid #fff;
   text-align: center;
-  font-size: 12px;
-  /* transition: 0.2s ease-in-out; */
+  font-size: 14px;
+  transition: 0.2s ease-in-out;
 }
 
 .rowClass th:hover {
   color: #b9b2b2;
-}
-
-.rowClass th:hover span.icon-arrow {
-  border: 1px solid #b9b2b2;
-}
-
-.rowClass th.active span.icon-arrow {
-  background-color: #02e0d9;
-  color: #fff;
 }
 
 .rowClass th.asc span.icon-arrow {
